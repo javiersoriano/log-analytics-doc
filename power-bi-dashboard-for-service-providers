@@ -33,4 +33,5 @@ Start by opeining your Recovery Services Vault:
 1. In the Azure portal, click **All services**. In the list of resources, type **Recovery Services Vault**. As you begin typing, the list filters based on your input. Select **Recovery Services Vault**.
 2. In the Recovery Services Vault subscriptions page, select the vault that you will work with
 3. Select **Backup Reports** as shown in the picture. <br><br> ![Backup Reports](media/Recovery_Services_Vault-Backup_Reports.PNG)
+4. Select **Diagnostics Settings**.
 
