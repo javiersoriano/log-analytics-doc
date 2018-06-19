@@ -15,7 +15,7 @@ In this tutorial you will learn:
 > * Customize a tile in a shared dashboard
 > * Understand key metrics for a Service Provider
 
-To complete this tutorial you must have two or more Log Analytics workspaces located in two or more Azure AD tenants. These workspaces should have some logging information to build the first report. For this example, we have used Azure Backup diagnostic logs, but other logs can also be used.
+To complete this tutorial you must have two or more Log Analytics workspaces located in two or more Azure AD tenants. These workspaces should have some logging information to build the first report. For this example, we have used Azure Backup diagnostic logs, but other logs can also be used. You also need to have PowerBI Desktop installed.
 
 > [!NOTE]
 > Please review this article before you continue reading [Log Analytics features for Service Providers] (https://docs.microsoft.com/en-us/azure/log-analytics/log-analytics-service-providers#managing-multiple-customers-using-log-analytics).
@@ -52,7 +52,7 @@ Go to your Log Analytics workspace:
 3. Enter a query to see the status of Azure backup jobs.
 
 ```
-let Events = (union workspace("contosoretail-it").AzureDiagnostics, workspace("soriomspowerbidemo").AzureDiagnostics)
+let Events = AzureDiagnostics
 | where Category == "AzureBackupReport" ;
 Events
 | where OperationName == "Job" and JobOperation_s == "Backup" 
@@ -70,5 +70,38 @@ on ProtectedServerUniqueId_s
 | extend Vault= Resource
 | summarize count() by ProtectedServerFriendlyName_s, JobStatus_s, Vault, TenantId
 ```
+![Log Search](media/log_search_query.PNG)
+
+In this query, we are just querying one workspace, but as explained in [here](https://docs.microsoft.com/en-us/azure/log-analytics/log-analytics-cross-workspace-search), you can query across several workspaces within the same tenant. The same query, spanning two workspaces would start as follows:
+
+```
+let Events = (union workspace("workspace1").AzureDiagnostics, workspace("workspace2").AzureDiagnostics)
+...
+```
+
+In this example we suee the workspace name to reference a workspace, but you can also specify its qualified name, workspace ID or Azure Resource ID.
+
+4. Change the time scope to just the last day.![Change Time Scope](media/log_analytics_change_date.PNG). Click **RUN** to verify that the query returns the desired data.
+5. Now that we have a query with the info that we want, we can export it to PowerBI. To do this just click the **PowerBI** button at the top of the screen.
+
+![PowerBI Export](media/log_search_query_powerbi_export.PNG)
+
+6. This will bring a pop-up to open or save a text file with the PowerBI query in it. **Save As** the file to your local drive and give it a name related to the tenant/workspace you're in.
+
+Repeat steps 1 to 5 with another Log Analytics workspace located in a different Azure AD tenant.
+
+By the end of this section, you should have two PowerBI queries saved to your local drive. Each of these queries get data from a separate workspace in a separate tenant.
+
+## Build a PowerBI report that aggregates data from different workspaces/tenants
+
+You will now import the Log Analytics queries into PowerBI Desktop, shape the data and build a dashboard.
+
+1. Open **PowerBI Desktop**.
+2. Click on **Get Data** then **Blank Query**.
+![PowerBI Blank Query](media/PowerBI_get_data.png)
+3. From the top menu, click **Advanced Editor**.
+4. Open one of the text files with the exported query from Log Analytics, copy all contents and paste them into the Advanced Editor.
+5. Click **Done**.
+
 
 
