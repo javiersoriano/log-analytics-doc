@@ -49,6 +49,26 @@ Go to your Log Analytics workspace:
 
 1. In the Azure portal, click **All services** and select **Log Analytics**.
 2. Select the **Log Search** tile.
-3. Enter a query to see the status of Azure backup jobs
+3. Enter a query to see the status of Azure backup jobs.
+
+```
+let Events = (union workspace("contosoretail-it").AzureDiagnostics, workspace("soriomspowerbidemo").AzureDiagnostics)
+| where Category == "AzureBackupReport" ;
+Events
+| where OperationName == "Job" and JobOperation_s == "Backup" 
+| project ProtectedServerUniqueId_s, JobStatus_s, Resource, TenantId
+| join kind=inner
+(
+    Events
+    | where OperationName == "ProtectedServer"
+    | where ProtectedServerFriendlyName_s != ""
+    | distinct ProtectedServerUniqueId_s, ProtectedServerFriendlyName_s
+    | project ProtectedServerUniqueId_s, ProtectedServerFriendlyName_s
+)
+on ProtectedServerUniqueId_s
+| project ProtectedServerFriendlyName_s, JobStatus_s, Resource, TenantId
+| extend Vault= Resource
+| summarize count() by ProtectedServerFriendlyName_s, JobStatus_s, Vault, TenantId
+```
 
 
