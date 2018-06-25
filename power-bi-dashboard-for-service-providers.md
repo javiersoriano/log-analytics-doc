@@ -102,22 +102,22 @@ You will now import the Log Analytics queries into PowerBI Desktop, shape the da
 1. Open **PowerBI Desktop**.
 2. Click on **Get Data** then **Blank Query**.
 
-<br><br>![PowerBI Blank Query](media/PowerBI_get_data.png)
+<br><br>![PowerBI Blank Query](media/PowerBI_get_data.PNG)
 
 3. From the top menu, click **Advanced Editor**.
 4. Open one of the text files with the exported query from Log Analytics, copy all contents and paste them into the Advanced Editor.
 5. Click **Done**. You should see a table with the same results you saw in Log Analytics.
 6. Rename the query to reflect its contents and tenant where is coming from.
 
-Repeat steps 1 to 6 with the other Log Analytics query coming from the other tenant.![PowerBI Queries](media/powerbi_two_queries.png)
+Repeat steps 1 to 6 with the other Log Analytics query coming from the other tenant.![PowerBI Queries](media/powerbi_two_queries.PNG)
 
 ### Aggregate queries in PowerBI
 
 Now, you need to aggregate the data from both queries to build a consolidated view. For this, we will use some of the combine features in PowerBI.
 
-1. Within PowerBI query editor, click on **Append Queries as New** under Append Queries.<br><br>![Append PowerBI Queries](media/powerbi_append_queries.png)
+1. Within PowerBI query editor, click on **Append Queries as New** under Append Queries.<br><br>![Append PowerBI Queries](media/powerbi_append_queries.PNG)
 
-2. In the Append dialog, select the queries to append and click **OK**.<br><br>![Append PowerBI Queries Dialog](media/powerbi_append_queries_dialog.png)
+2. In the Append dialog, select the queries to append and click **OK**.<br><br>![Append PowerBI Queries Dialog](media/powerbi_append_queries_dialog.PNG)
 
 3. Rename the query with a meaningful name. Click **Close & Apply** button in the left-top corner.
 
@@ -128,12 +128,12 @@ Now that you have a query with the results that you need, you can build your Pow
 1. From the visualizations pane, select the **Donut Chart** icon. This will print a blank donut chart in your report view.
 2. From the fields pane, expand your aggregated query name and check **count_** and **JobStatus_s** fields. You will now see the chart with the number of Completed/Failed backup jobs. You can customize colors, column names and other settings in the Visualizations pane.
 
-<br><br>![PowerBI Donut Chart](media/powerbi_donut_chart.png)
+<br><br>![PowerBI Donut Chart](media/powerbi_donut_chart.PNG)
 
 3. Click on any blank part of the report and then, from the visualizations pane, select the **Table** icon.
 4. From the fields pane, expand your aggregated query name and check **count_**, **JobStatus_s** and **ProtectedServerFriendlyName_s** fields. Customize the view as required.
 
-<br><br>![PowerBI Table Chart](media/powerbi_table_chart.png)
+<br><br>![PowerBI Table Chart](media/powerbi_table_chart.PNG)
 
 
 
