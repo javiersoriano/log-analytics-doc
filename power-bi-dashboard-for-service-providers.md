@@ -102,7 +102,7 @@ You will now import the Log Analytics queries into PowerBI Desktop, shape the da
 1. Open **PowerBI Desktop**.
 2. Click on **Get Data** then **Blank Query**.
 
-<br><br>![PowerBI Blank Query](media/PowerBI_get_data.PNG)
+<br><br>![PowerBI Blank Query](media/PowerBI_get_data.png)
 
 3. From the top menu, click **Advanced Editor**.
 4. Open one of the text files with the exported query from Log Analytics, copy all contents and paste them into the Advanced Editor.
@@ -115,9 +115,9 @@ Repeat steps 1 to 6 with the other Log Analytics query coming from the other ten
 
 Now, you need to aggregate the data from both queries to build a consolidated view. For this, we will use some of the combine features in PowerBI.
 
-1. Within PowerBI query editor, click on **Append Queries as New** under Append Queries.<br>![Append PowerBI Queries](media/powerbi_append_queries.PNG)
+1. Within PowerBI query editor, click on **Append Queries as New** under Append Queries.<br>![Append PowerBI Queries](media/powerbi_append_queries.png)
 
-2. In the Append dialog, select the queries to append and click **OK**.<br>![Append PowerBI Queries Dialog](media/powerbi_append_queries_dialog.PNG)
+2. In the Append dialog, select the queries to append and click **OK**.<br>![Append PowerBI Queries Dialog](media/powerbi_append_queries_dialog.png)
 
 3. Rename the query with a meaningful name. Click **Close & Apply** button in the left-top corner.
 
