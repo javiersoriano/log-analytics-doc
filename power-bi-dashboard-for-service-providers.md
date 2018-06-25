@@ -106,21 +106,24 @@ You will now import the Log Analytics queries into PowerBI Desktop, shape the da
 
 Repeat steps 1 to 6 with the other Log Analytics query coming from the other tenant.
 
-![PowerBI Queries](media/powerbi_two_queries.png)
+![PowerBI Queries](media/power_bi_two_queries.png)
 
 Now, you need to aggregate the data from both queries to build a consolidated view. For this, we will use some of the combine features in PowerBI.
 
 1. Within PowerBI query editor, click on **Append Queries as New** under Append Queries.
 ![Append PowerBI Queries](media/powerbi_append_queries.png)
 2. In the Append dialog, select the queries to append and click **OK**.
+![Append PowerBI Queries Dialog](media/powerbi_append_queries_dialog.png)
 3. Rename the query with a meaningful name. Click **Close & Apply** button in the left-top corner.
 
 Now that you have a query with the results that you need, you can build your PowerBI report.
 
 1. From the visualizations pane, select the **Donut Chart** icon. This will print a blank donut chart in your report view.
 2. From the fields pane, expand your aggregated query name and check **count_** and **JobStatus_s** fields. You will now see the chart with the number of Completed/Failed backup jobs. You can customize colors, column names and other settings in the Visualizations pane.
+![PowerBI Donut Chart](media/powerbi_donut_chart.png)
 3. Click on any blank part of the report and then, from the visualizations pane, select the **Table** icon.
 4. From the fields pane, expand your aggregated query name and check **count_**, **JobStatus_s** and **ProtectedServerFriendlyName_s** fields. Customize the view as required.
+![PowerBI Table Chart](media/powerbi_table_chart.png)
 
 
 
