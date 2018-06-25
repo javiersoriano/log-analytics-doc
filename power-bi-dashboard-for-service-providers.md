@@ -104,9 +104,7 @@ You will now import the Log Analytics queries into PowerBI Desktop, shape the da
 5. Click **Done**. You should see a table with the same results you saw in Log Analytics.
 6. Rename the query to reflect its contents and tenant where is coming from.
 
-Repeat steps 1 to 6 with the other Log Analytics query coming from the other tenant.
-
-![PowerBI Queries](media/powerbi_two_queries.png)
+Repeat steps 1 to 6 with the other Log Analytics query coming from the other tenant.![PowerBI Queries](media/powerbi_two_queries.png)
 
 Now, you need to aggregate the data from both queries to build a consolidated view. For this, we will use some of the combine features in PowerBI.
 
