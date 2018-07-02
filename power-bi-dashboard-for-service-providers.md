@@ -1,21 +1,29 @@
-# Create a PowerBI dashboard for Service Providers
+# Create a PowerBI dashboard for Service Providers using Log Analytics
 
-This tutorial explains how to build a Power BI dashboard that pulls information from several different Log Analytics workspaces belonging to different Azure Active Directory tenants. 
+Service Providers need to have a global view of the different customers they manage. This provides them with better visibility of their customer base, save time when monitoring customer environments and gain insights into trends or abnormal patterns. If you use Log Analytics as part of your monitoring strategy, this article is for you.
 
-Log Analytics queries can be ran across workspaces under the same tenant (see [here] (https://docs.microsoft.com/en-us/azure/log-analytics/log-analytics-cross-workspace-search)), but this method doesn't work if the workspaces are located in different tenants. To do this, you can aggregate data in these workspaces through PowerBI. This article provides a step-by-step guide on how to build such a dashboard. 
+This tutorial explains how to build this global view through a Power BI dashboard that pulls information from several different Log Analytics workspaces belonging to different Azure Active Directory tenants. 
 
-Such a dashboard can provide a global view of all the customers/tenants being managed by a Service Provider, and therefore, simplify operations such as monitoring, backup or alerting.
+Log Analytics queries can be ran across workspaces under the same tenant (see [here] (https://docs.microsoft.com/en-us/azure/log-analytics/log-analytics-cross-workspace-search)), but this method doesn't work if the workspaces are located in different tenants. To do this, you can aggregate data in these workspaces through PowerBI. 
 
-In this tutorial you will learn:
+This article provides a step-by-step guide on how to build such a dashboard, showing how this can be done for backup monitoring. Similar steps can be followed to extend the dashboard with Update Management, Alerting and other views as needed. 
+
+Here is a sample of the end result:
+
+<br>![Backup Report Sample](media/dashboard_sample1.PNG)
+<br>![Update Management Reports Sample](media/dashboard_sample2.PNG)
+
+In this tutorial you will learn how to:
 
 > [!div class="checklist"]
 > * Enable diagnostics for Recovery Services Vault
 > * Export your Log Analytics queries to PowerBI
 > * Build a PowerBI report that aggregates data from different workspaces/tenants 
-> * Customize a tile in a shared dashboard
-> * Understand key metrics for a Service Provider
 
-To complete this tutorial you must have two or more Log Analytics workspaces located in two or more Azure AD tenants. These workspaces should have some logging information to build the first report. For this example, we have used Azure Backup diagnostic logs, but other logs can also be used. You also need to have PowerBI Desktop installed.
+> [!NOTE]
+> To complete this tutorial you must have two or more Log Analytics workspaces located in two or more Azure AD tenants. These workspaces should have some  logging information to build the first report. For this example, we have used Azure Backup diagnostic logs, but other logs can also be used. You also need to have PowerBI Desktop installed.
+>
+>
 
 > [!NOTE]
 > Please review this article before you continue reading [Log Analytics features for Service Providers] (https://docs.microsoft.com/en-us/azure/log-analytics/log-analytics-service-providers#managing-multiple-customers-using-log-analytics).
@@ -102,10 +110,11 @@ You will now import the Log Analytics queries into PowerBI Desktop, shape the da
 1. Open **PowerBI Desktop**.
 2. Click on **Get Data** then **Blank Query**.
 
-<br><br>![PowerBI Blank Query](media/PowerBI_get_data.png)
+<br>![PowerBI Blank Query](media/PowerBI_get_data.png)
 
 3. From the top menu, click **Advanced Editor**.
 4. Open one of the text files with the exported query from Log Analytics, copy all contents and paste them into the Advanced Editor.
+<br>![PowerBI Advanced Editor](media/powerbi_advanced_editor.PNG)
 5. Click **Done**. You should see a table with the same results you saw in Log Analytics.
 6. Rename the query to reflect its contents and tenant where is coming from.
 
@@ -115,7 +124,7 @@ Repeat steps 1 to 6 with the other Log Analytics query coming from the other ten
 
 Now, you need to aggregate the data from both queries to build a consolidated view. For this, we will use some of the combine features in PowerBI.
 
-1. Within PowerBI query editor, click on **Append Queries as New** under Append Queries.<br>![Append PowerBI Queries](media/powerbi_append_queries.png)
+1. Within PowerBI query editor, click on **Append Queries as New** under **Append Queries**.<br>![Append PowerBI Queries](media/powerbi_append_queries.png)
 
 2. In the Append dialog, select the queries to append and click **OK**.<br>![Append PowerBI Queries Dialog](media/powerbi_append_queries_dialog.png)
 
@@ -134,6 +143,23 @@ Now that you have a query with the results that you need, you can build your Pow
 4. From the fields pane, expand your aggregated query name and check **count_**, **JobStatus_s** and **ProtectedServerFriendlyName_s** fields. Customize the view as required.
 
 <br>![PowerBI Table Chart](media/powerbi_table_chart.PNG)
+
+### Publish PowerBI report and schedule data refresh
+
+Now that your report is built, you need to publish it to the PowerBI service so it can be viewed and shared with other team members.
+
+1. From the dashboard screen in PowerBI Desktop, click on **Publish** in the menu bar.
+2. Select a destination where the report will be published. When done, open the report clicking the link. You will be redirected to your browser.
+<br>![PowerBI Publish](media/powerbi_publish.PNG)
+
+From PowerBI you can modify when the data shown in the reports is refreshed: 
+
+3. Expand **My Workspace**
+4. Go to **Datasets** and click on the three dots next to your report. Click on **Schedule Refresh**.
+<br>![PowerBI dataset](media/powerbi_dataset.PNG)
+5. Configure it to your needs. Here's a sample refresh schedule.
+<br>![PowerBI Schedule Refresh](media/powerbi_schedule_refresh.PNG)
+
 
 
 
